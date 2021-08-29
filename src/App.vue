@@ -1,70 +1,63 @@
 <template>
-  <section class="container">
-    <h2>{{ user.name }}</h2>
-    <h3>{{ user.age }}</h3>
-    <button @click="setAge">change age</button>
-  </section>
+  <h2>My Course Goal</h2>
+  <!-- Task 1: Output your main course goal with help of the composition API -->
+  <!-- Don't hardcode it into the template, instead hardcode it into the JS code -->
+  <!-- <h3 v-if="onShow">{{goal}}</h3> -->
+  <!-- <h3 v-if="goals.onShow">{{goals.myGoal}}</h3> -->
+  <h3 v-if="onShow">{{myGoal}}</h3>
+  <!-- Task 2: Toggle (show/ hide) the goal with help of the button  -->
+  <button @click="onToggle">Toggle Goal</button>
+  <!-- Task 3: Manage data in three ways -->
+  <!-- => Separate refs -->
+  <!-- => Ref Object -->
+  <!-- => Reactive Object -->
+  <!-- Task 4: Also solve the assignment with the Options API -->
 </template>
 
 <script>
-import { reactive } from "vue";
+// import { reactive } from "vue";
 export default {
-  setup(){
-    // const uName = ref("PpraepP");
-    // const uAge = ref(25);
+  // setup(){
+  //   // const myGoal = ref('I can work be nice!');
+  //   // const onShow = ref(true);
 
-    const user = reactive({
-      name: "PpraepP",
-      age: 25
-    })
-    
-    setTimeout(() => {
-      // if use ref => uName.value = 'Prae' 
-      // if use ref => uAge.value = '26' 
-      user.name = 'Prae';
-      user.age = 26
-    }, 2000)
+  //   // const courseDataRefs = ref({
+  //   //   myGoal: 'I can work be nice!',
+  //   //   onShow: true
+  //   // })
 
-    function setNewAge(){
-      // if use ref() => uAge.value = '25
-      user.age = 25
-    }
+  //   const courseDataReacetive = reactive({
+  //     myGoal: 'I can work be nice!',
+  //     onShow: true
+  //   })
 
-    return { user: user, setAge: setNewAge}
-  },
-  // data() {
-  //   return {
-  //     userName: 'Maximilian',
-  //      age: 20
-  //   };
-  // },
-  // methods: {
-  //   setAge(){
-  //     this.age = 25
+  //   function toggleMenu(){
+  //     console.log('onToggle', courseDataReacetive.onShow);
+  //     // onShow.value = !onShow.value;
+  //     // courseDataRefs.value.onShow = !courseDataRefs.value.onShow;
+  //     courseDataReacetive.onShow = !courseDataReacetive.onShow;
   //   }
+  //   return{ goals: courseDataReacetive, onToggle: toggleMenu }
   // }
-};
+  data: () => ({
+    myGoal: 'I can work be nice!',
+    onShow: true
+  }),
+  methods: {
+    onToggle(){
+      console.log('onToggle');
+      this.onShow = !this.onShow
+    }
+  }
+}
 </script>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
 html {
   font-family: sans-serif;
 }
-
 body {
-  margin: 0;
-}
-
-.container {
-  margin: 3rem auto;
-  max-width: 30rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  padding: 1rem;
+  margin: 3rem;
   text-align: center;
 }
 </style>
