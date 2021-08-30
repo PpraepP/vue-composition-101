@@ -1,6 +1,7 @@
 <template>
   <section class="container">
     <h2>{{ username }}</h2>
+    <h3>{{ age }}</h3>
     <button @click="setAge">change age</button>
     <div>
       <!-- use function -->
@@ -13,27 +14,34 @@
 </template>
 
 <script>
-import { ref, reactive, computed } from "vue";
+import { ref, computed, watch } from "vue";
 export default {
   setup(){
-    // const uName = ref("PpraepP");
-    // const uAge = ref(25);
+    const uAge = ref(25);
     const firstname = ref('');
     const lastname = ref('');
-
-    const user = reactive({
-      name: "PpraepP",
-      age: 25
-    })
 
     //computed(function() { //code here });
     const uName = computed(() => 
       `${firstname.value} ${lastname.value}`
     )
 
+    // watch with single value
+    // watch(uAge, function(newVal, oldVal){
+    //   console.log('old age', oldVal);
+    //   console.log('new age', newVal)
+    // })
+
+    // watch with muti value
+    watch([uAge, uName], function(newVals, oldVals){
+      console.log('old age', oldVals);
+      console.log('new age', newVals)
+    })
+
     function setNewAge(){
-      // if use ref() => uAge.value = '25
-      user.age = 25
+      // if use ref() => uAge.value = 25
+      // if use reactive() => user.age = 25
+      uAge.value = 26
     }
 
     function setFirstname(evt){
@@ -44,7 +52,7 @@ export default {
       lastname.value = evt.target.value;
     }
 
-    return { username: uName, setAge: setNewAge, setFirstname, setLastname, firstname, lastname}
+    return { username: uName, age: uAge, setAge: setNewAge, setFirstname, setLastname, firstname, lastname}
   },
   // data() {
   //   return {
@@ -55,6 +63,11 @@ export default {
   // methods: {
   //   setAge(){
   //     this.age = 25
+  //   }
+  // },
+  // watch: {
+  //   age(val){
+  //     console.log('age is', val)
   //   }
   // }
 };
