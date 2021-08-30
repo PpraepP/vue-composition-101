@@ -36,13 +36,13 @@ export default {
       user.age = 25
     }
 
-    // function setFirstname(evt){
-    //   firstname.value = evt.target.value;
-    // }
+    function setFirstname(evt){
+      firstname.value = evt.target.value;
+    }
 
-    // function setLastname(evt){
-    //   lastname.value = evt.target.value;
-    // }
+    function setLastname(evt){
+      lastname.value = evt.target.value;
+    }
 
     return { username: uName, setAge: setNewAge, setFirstname, setLastname, firstname, lastname}
   },
