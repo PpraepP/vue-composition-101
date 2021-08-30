@@ -1,36 +1,50 @@
 <template>
   <section class="container">
-    <h2>{{ user.name }}</h2>
-    <h3>{{ user.age }}</h3>
+    <h2>{{ username }}</h2>
     <button @click="setAge">change age</button>
+    <div>
+      <!-- use function -->
+      <!-- <input type="text" placeholder="Firstname" @input="setFirstname">
+      <input type="text" placeholder="Lastname" @input="setLastname"> -->
+      <input type="text" placeholder="Firstname" v-model="firstname">
+      <input type="text" placeholder="Lastname" v-model="lastname">
+    </div>
   </section>
 </template>
 
 <script>
-import { reactive } from "vue";
+import { ref, reactive, computed } from "vue";
 export default {
   setup(){
     // const uName = ref("PpraepP");
     // const uAge = ref(25);
+    const firstname = ref('');
+    const lastname = ref('');
 
     const user = reactive({
       name: "PpraepP",
       age: 25
     })
-    
-    setTimeout(() => {
-      // if use ref => uName.value = 'Prae' 
-      // if use ref => uAge.value = '26' 
-      user.name = 'Prae';
-      user.age = 26
-    }, 2000)
+
+    //computed(function() { //code here });
+    const uName = computed(() => 
+      `${firstname.value} ${lastname.value}`
+    )
 
     function setNewAge(){
       // if use ref() => uAge.value = '25
       user.age = 25
     }
 
-    return { user: user, setAge: setNewAge}
+    // function setFirstname(evt){
+    //   firstname.value = evt.target.value;
+    // }
+
+    // function setLastname(evt){
+    //   lastname.value = evt.target.value;
+    // }
+
+    return { username: uName, setAge: setNewAge, setFirstname, setLastname, firstname, lastname}
   },
   // data() {
   //   return {
