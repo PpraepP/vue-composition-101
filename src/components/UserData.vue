@@ -3,18 +3,20 @@
     <h3>{{ age }}</h3>
 </template>
 <script>
-import { computed } from "vue";
+import { computed, inject } from "vue";
 export default {
-    props: ['firstname', 'lastname', 'age'],
+    props: ['firstname', 'lastname'],
     setup(props, ctx){
         console.log('props', props);
         console.log('context', ctx);
+
+        const age = inject('userAge');
 
         // ctx.emit('save-data', 1); // this.$emit('save-data', 1);
 
         const userName = computed(() => props.firstname +' '+ props.lastname)
 
-        return { userName }
+        return { userName, age }
     }
     // computed:{
     //     userName(){
